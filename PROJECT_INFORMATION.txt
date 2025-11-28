@@ -1,0 +1,109 @@
+# ATTENDANCE PROJECT INFORMATION
+
+## PROJECT OVERVIEW
+The Attendance system is a comprehensive attendance management solution that utilizes NFC technology to automate student attendance tracking in educational institutions. The system consists of a backend API server, NFC reader integration, and a frontend web portal.
+
+## TECHNOLOGY STACK
+
+### Backend Technologies
+- **Framework**: FastAPI (v0.104.1) - High-performance Python web framework
+- **Server**: Uvicorn (v0.24.0) - ASGI server implementation
+- **Database**: MongoDB (v4.6.0) - NoSQL document database
+- **Authentication**: JWT (JSON Web Tokens) via python-jose (v3.3.0)
+- **Password Hashing**: bcrypt (v4.0.1) and passlib (v1.7.4)
+- **Environment Variables**: python-dotenv (v1.0.0)
+- **Data Validation**: Pydantic (v2.4.2)
+- **Form Handling**: python-multipart (v0.0.6)
+
+### Frontend Technologies
+- **Framework**: React with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **Package Manager**: npm/bun
+
+### NFC Implementation
+- **Library**: nfcpy (v1.0.4) - Python library for NFC communication
+- **Tag Frequency**: 13.56 MHz (Standard NFC frequency)
+- **Compatible Tag Types**: 
+  - ISO/IEC 14443 Type A and B
+  - MIFARE Classic
+  - MIFARE Ultralight
+  - FeliCa
+- **Security**: HMAC-SHA256 for tag data verification
+
+## SYSTEM ARCHITECTURE
+
+### Backend Components
+1. **Main API Server** (main.py)
+   - Handles HTTP requests and responses
+   - Implements RESTful API endpoints
+   - Manages authentication and authorization
+
+2. **Database Service** (database.py)
+   - Connects to MongoDB
+   - Performs CRUD operations on collections
+
+3. **Authentication Service** (auth.py)
+   - Implements JWT-based authentication
+   - Handles user login, registration, and token validation
+   - Password hashing and verification
+
+4. **NFC Service** (nfc_service.py)
+   - Manages NFC reader communication
+   - Processes tag data
+   - Implements debouncing to prevent duplicate readings
+   - Verifies tag data integrity using HMAC
+
+5. **Data Models** (models.py)
+   - Defines Pydantic models for data validation
+   - Structures for students, attendance records, and users
+
+### NFC Implementation Details
+- **Reader Communication**: Direct USB connection to host computer
+- **Tag Detection**: Continuous polling with debounce mechanism (10 seconds)
+- **Data Format**: UID (Unique Identifier) stored in hexadecimal format
+- **Security Measures**:
+  - HMAC signature verification to prevent tampering
+  - Server-side validation of tag data
+  - Debouncing to prevent duplicate attendance entries
+
+### Database Collections
+- students: Student information and associated NFC tags
+- attendance: Attendance records with timestamps
+- users: System users (staff, administrators)
+- credits: Credit system for attendance tracking
+
+## DEPLOYMENT AND SETUP
+
+### Requirements
+- Python 3.8 or higher
+- MongoDB 4.0 or higher
+- NFC Reader compatible with nfcpy
+- Web browser for frontend access
+
+### Setup Process
+1. Install Python dependencies: `pip install -r requirements.txt`
+2. Configure environment variables in .env file
+3. Set up MongoDB database
+4. Run NFC setup script: `python setup_nfc.py`
+5. Start backend server: `python run.py`
+6. Access frontend through web browser
+
+## SECURITY FEATURES
+- JWT-based authentication with expiration
+- Password hashing using bcrypt
+- HMAC verification for NFC tag data
+- Environment variable protection for sensitive information
+
+## TESTING
+- Unit tests for backend functionality
+- MongoDB connectivity tests
+- User management tests
+- NFC API tests
+- Comprehensive test suite in testsprite_tests directory
+
+## ADDITIONAL RESOURCES
+- Documentation files in project root
+- Setup instructions in SETUP_INSTRUCTIONS.md
+- Quick start guide in QUICK_START_GUIDE.md
+- NFC implementation guide in NFC_IMPLEMENTATION_GUIDE.md

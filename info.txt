@@ -1,0 +1,12 @@
+Backend/API Information
+
+- The backend provides RESTful APIs for managing student attendance records.
+- Authentication is handled via JWT tokens.
+- Endpoints include:
+  - /api/auth/login: User authentication
+  - /api/attendance: CRUD operations for attendance records
+  - /api/students: Manage student profiles
+- The backend is built with Node.js and Express.
+- Data is stored in a MongoDB database.
+- CORS is enabled for frontend-backend communication.
+- API responses follow standard HTTP status codes and JSON format.
